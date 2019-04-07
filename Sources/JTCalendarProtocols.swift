@@ -152,6 +152,15 @@ public protocol JTAppleCalendarViewDelegate: class {
     ///     - indexPath: use this value when dequeing cells
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath)
     
+    /// Tells the delegate that the specified cell was removed from the calendar view.
+    /// - Parameters:
+    ///     - calendar: The JTAppleCalendar view giving this information.
+    ///     - cell: The cell
+    ///     - date: date attached to the cell
+    ///     - cellState: The month the date-cell belongs to.
+    ///     - indexPath: The index path of the data item that the cell represented.
+    func calendar(_ calendar: JTAppleCalendarView, didEndDisplaying cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath)
+
     /// Called to retrieve the size to be used for decoration views
     func sizeOfDecorationView(indexPath: IndexPath) -> CGRect
 }

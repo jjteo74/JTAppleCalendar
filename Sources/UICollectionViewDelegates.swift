@@ -52,7 +52,18 @@ extension JTAppleCalendarView: UICollectionViewDelegate, UICollectionViewDataSou
         }
         calendarDelegate!.calendar(self, willDisplay: cell as! JTAppleCell, forItemAt: cellState.date, cellState: cellState, indexPath: indexPath)
     }
-    
+
+    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let delegate = calendarDelegate else { return }
+        let cellState: CellState
+        if let validCachedCellState = selectedCellData[indexPath]?.cellState {
+          cellState = validCachedCellState
+        } else {
+          cellState = cellStateFromIndexPath(indexPath)
+        }
+        delegate.calendar(self, didEndDisplaying: cell as! JTAppleCell, forItemAt: cellState.date, cellState: cellState, indexPath: indexPath)
+    }
+
     /// Asks your data source object for the cell that corresponds
     /// to the specified item in the collection view.
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
